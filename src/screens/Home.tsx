@@ -5,7 +5,7 @@ import { api } from '../lib/supabase'
 import { AVATAR_IMGS } from '../lib/avatars'
 import type { OnlineSession } from '../App'
 import bmLogo from '../imports/03-BMC-Right_FA-EN_1.png'
-import backImg from '../imports/Back.png'
+import backImg from '../imports/image-6.png'
 
 interface Props {
   dispatch: React.Dispatch<GameAction>
@@ -239,17 +239,18 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
         <p className="text-xs mt-0.5" style={{ color: '#6D6E71' }}>بازی گروهی رقابتی — ۳ تا ۸ نفر</p>
       </div>
 
-      {/* ── 2. Illustration — fills remaining space, min-h-0 prevents blowout ── */}
-      <div className="relative flex-1 min-h-0 flex items-center justify-center overflow-hidden">
+      {/* ── 2. Illustration — fixed height so buttons always visible ── */}
+      <div className="relative flex-shrink-0 flex items-end justify-center overflow-hidden"
+        style={{ height: 'clamp(160px, 38vh, 280px)' }}>
         <img
           src={backImg}
           alt=""
           aria-hidden
-          className="w-full h-full object-contain object-center pointer-events-none select-none"
+          className="h-full w-auto object-contain object-bottom pointer-events-none select-none"
         />
-        <div className="absolute inset-x-0 top-0 h-12 pointer-events-none"
+        <div className="absolute inset-x-0 top-0 h-10 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, #111112, transparent)' }} />
-        <div className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
+        <div className="absolute inset-x-0 bottom-0 h-8 pointer-events-none"
           style={{ background: 'linear-gradient(to top, #111112, transparent)' }} />
       </div>
 
