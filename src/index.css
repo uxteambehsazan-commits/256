@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Exo+2:wght@600;700;800;900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-persian: 'Vazirmatn', sans-serif;
+  --font-display: 'Exo 2', sans-serif;
+  /* Behsazan Mellat brand */
+  --color-bm-red:    #CC2229;
+  --color-bm-red-dk: #9e1a20;
+  --color-bm-red-lt: #e84249;
+  --color-bm-gray:   #6D6E71;
+  --color-bm-gray-lt:#9a9b9e;
+  /* Game surfaces */
+  --color-gbg:   #111112;
+  --color-gpanel:#1a1a1c;
+  --color-gcard: #222224;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #111112;
+  color: #fff;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  direction: rtl;
+  height: 100%;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+#root { height: 100dvh; overflow: hidden; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #CC2229; border-radius: 2px; }
+
+@keyframes pop-in {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  70%  { transform: scale(1.15) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+@keyframes score-fly {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-60px) scale(1.4); opacity: 0; }
+}
+@keyframes glow-pulse {
+  0%,100% { box-shadow: 0 0 12px 2px currentColor; }
+  50%      { box-shadow: 0 0 28px 8px currentColor; }
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+@keyframes slide-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { transform: translateX(60px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes reveal-big {
+  0%   { transform: scale(0.3) rotate(-20deg); opacity: 0; }
+  60%  { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1)   rotate(0deg); opacity: 1; }
+}
+@keyframes confetti-fall {
+  0%   { transform: translateY(-10px) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(110vh)  rotate(720deg); opacity: 0; }
+}
+@keyframes timer-warning {
+  0%,100% { color: #CC2229; transform: scale(1); }
+  50%      { color: #e84249; transform: scale(1.1); }
+}
+@keyframes bg-shift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+@keyframes rank-move {
+  0%   { transform: scale(1.05); background: rgba(204,34,41,0.15); }
+  100% { transform: scale(1);    background: transparent; }
+}
+@keyframes red-pulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+.animate-pop-in        { animation: pop-in 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.animate-shake         { animation: shake 0.4s ease; }
+.animate-score-fly     { animation: score-fly 0.8s ease forwards; }
+.animate-glow-pulse    { animation: glow-pulse 1.2s ease-in-out infinite; }
+.animate-float         { animation: float 3s ease-in-out infinite; }
+.animate-slide-up      { animation: slide-up 0.4s ease forwards; }
+.animate-slide-in-right{ animation: slide-in-right 0.4s ease forwards; }
+.animate-reveal-big    { animation: reveal-big 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.animate-timer-warning { animation: timer-warning 0.5s ease-in-out infinite; }
+.animate-rank-move     { animation: rank-move 0.8s ease; }
+
+/* Background: dark charcoal with subtle red gradient */
+.game-bg {
+  background: linear-gradient(135deg, #0e0e0f 0%, #181618 40%, #1a1010 100%);
+  background-size: 400% 400%;
+  animation: bg-shift 10s ease infinite;
+}
+
+/* Neon borders — now brand-red */
+.neon-border-red    { box-shadow: 0 0 12px #CC2229, inset 0 0 12px rgba(204,34,41,0.1); border-color: #CC2229; }
+.neon-border-gray   { box-shadow: 0 0 8px #6D6E71,  inset 0 0 8px  rgba(109,110,113,0.1); border-color: #6D6E71; }
+/* kept for backward compat in mission components */
+.neon-border-cyan   { box-shadow: 0 0 12px #CC2229, inset 0 0 12px rgba(204,34,41,0.1); border-color: #CC2229; }
+.neon-border-purple { box-shadow: 0 0 12px #CC2229, inset 0 0 12px rgba(204,34,41,0.1); border-color: #CC2229; }
+.neon-border-yellow { box-shadow: 0 0 12px #ffd60a, inset 0 0 12px rgba(255,214,10,0.1); border-color: #ffd60a; }
+
+/* Panel — dark gray, red border hint */
+.glass-panel {
+  background: rgba(26,26,28,0.85);
+  backdrop-filter: blur(12px);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(204,34,41,0.25);
+}
+
+.btn-game {
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-game:hover  { transform: scale(1.05); }
+.btn-game:active { transform: scale(0.96); }
+
+/* Memory card flip */
+.card-flip { perspective: 600px; }
+.card-flip-inner {
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.card-flip-inner.flipped { transform: rotateY(180deg); }
+.card-face {
+  backface-visibility: hidden;
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.card-back  { backface-visibility: hidden; }
+.card-front { transform: rotateY(180deg); }
+
+/* Behsazan logo strip at top */
+.bm-header-bar {
+  border-bottom: 2px solid #CC2229;
+}
