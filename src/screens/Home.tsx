@@ -225,7 +225,7 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
 
   /* ── Main start screen ── */
   return (
-    <div className="h-full flex flex-col relative overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)', paddingTop: 'env(safe-area-inset-top)' }}>
+    <div className="h-full flex flex-col relative overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)', paddingTop: 'env(safe-area-inset-top)', background: '#000' }}>
 
       {/* ── 1. Title — top, fixed height ── */}
       <div className="relative z-10 flex-shrink-0 flex flex-col items-center pt-4 pb-1 px-5 animate-pop-in">
