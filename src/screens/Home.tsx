@@ -263,15 +263,15 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
         </button>
 
         <div className="flex gap-2">
-          <button onClick={() => setStep('join')}
-            className="btn-game flex-1 rounded-2xl font-bold text-white"
-            style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(204,34,41,0.08)', border: '1.5px solid #CC222940' }}>
-            🔑 ورود با کد
-          </button>
           <button onClick={() => setStep('create-local')}
             className="btn-game flex-1 rounded-2xl font-bold text-white"
             style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(109,110,113,0.1)', border: '1.5px solid #6D6E7140' }}>
             🎮 یک دستگاه
+          </button>
+          <button onClick={() => setStep('join')}
+            className="btn-game flex-1 rounded-2xl font-bold text-white"
+            style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(204,34,41,0.08)', border: '1.5px solid #CC222940' }}>
+            🔑 ورود با کد
           </button>
         </div>
 
@@ -283,15 +283,15 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
         </button>
 
         <div className="flex gap-2">
-          <button onClick={onShowScores}
-            className="btn-game flex-1 rounded-2xl font-bold"
-            style={{ padding: 'clamp(0.5rem,2vw,0.75rem) 0.5rem', fontSize: 'clamp(0.75rem,3vw,0.875rem)', background: 'rgba(204,34,41,0.06)', border: '1.5px solid #CC222930', color: '#e84249' }}>
-            🏅 امتیازات
-          </button>
           <button onClick={onShowCredits}
             className="btn-game flex-1 rounded-2xl font-bold"
             style={{ padding: 'clamp(0.5rem,2vw,0.75rem) 0.5rem', fontSize: 'clamp(0.75rem,3vw,0.875rem)', background: 'rgba(109,110,113,0.07)', border: '1.5px solid #6D6E7130', color: '#9a9b9e' }}>
             👥 تهیه‌کنندگان
+          </button>
+          <button onClick={onShowScores}
+            className="btn-game flex-1 rounded-2xl font-bold"
+            style={{ padding: 'clamp(0.5rem,2vw,0.75rem) 0.5rem', fontSize: 'clamp(0.75rem,3vw,0.875rem)', background: 'rgba(204,34,41,0.06)', border: '1.5px solid #CC222930', color: '#e84249' }}>
+            🏅 امتیازات
           </button>
         </div>
       </div>
