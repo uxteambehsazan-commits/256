@@ -241,7 +241,7 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
 
       {/* ── 2. Illustration — fixed height so buttons always visible ── */}
       <div className="relative flex-shrink-0 flex items-end justify-center overflow-hidden"
-        style={{ height: 'clamp(160px, 38vh, 280px)' }}>
+        style={{ height: 'clamp(200px, 48vh, 360px)' }}>
         <img
           src={backImg}
           alt=""
@@ -255,7 +255,7 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
       </div>
 
       {/* ── 3. Buttons — bottom, fixed, never pushed off screen ── */}
-      <div className="relative z-10 flex-shrink-0 flex flex-col gap-2 px-4 pb-4 w-full max-w-sm mx-auto">
+      <div className="relative z-10 flex-1 flex flex-col justify-end gap-2 px-4 pb-4 w-full max-w-sm mx-auto">
         <button onClick={() => setStep('create-online')}
           className="btn-game w-full rounded-2xl font-black text-white"
           style={{ padding: 'clamp(0.75rem,3vw,1.25rem) 1rem', fontSize: 'clamp(0.95rem,4vw,1.25rem)', background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 4px 28px #CC222955' }}>
