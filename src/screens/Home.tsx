@@ -258,22 +258,22 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
 
       {/* ── 3. Buttons — bottom ── */}
       <div className="relative z-10 flex flex-col gap-3 px-5 pb-6 w-full max-w-sm mx-auto">
-        <button onClick={() => setStep('create-local')}
+        <button onClick={() => setStep('create-online')}
           className="btn-game w-full py-5 rounded-2xl font-black text-xl text-white"
           style={{ background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 4px 28px #CC222955' }}>
-          🎮 بازی گروهی — یک دستگاه
+          🌐 اتاق آنلاین
         </button>
 
         <div className="flex gap-3">
-          <button onClick={() => setStep('create-online')}
-            className="btn-game flex-1 py-4 rounded-2xl font-bold text-sm text-white"
-            style={{ background: 'rgba(204,34,41,0.08)', border: '1.5px solid #CC222940' }}>
-            🌐 اتاق آنلاین
-          </button>
           <button onClick={() => setStep('join')}
             className="btn-game flex-1 py-4 rounded-2xl font-bold text-sm text-white"
-            style={{ background: 'rgba(109,110,113,0.1)', border: '1.5px solid #6D6E7140' }}>
+            style={{ background: 'rgba(204,34,41,0.08)', border: '1.5px solid #CC222940' }}>
             🔑 ورود با کد
+          </button>
+          <button onClick={() => setStep('create-local')}
+            className="btn-game flex-1 py-4 rounded-2xl font-bold text-sm text-white"
+            style={{ background: 'rgba(109,110,113,0.1)', border: '1.5px solid #6D6E7140' }}>
+            🎮 یک دستگاه
           </button>
         </div>
 
