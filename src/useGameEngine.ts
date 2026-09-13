@@ -222,11 +222,16 @@ function reducer(state: GameState, action: GameAction): GameState {
         const ok = state.logicQuestion?.answer === action.answer
         ms = ok ? 150 : 0; detail = ok ? 'درست! +۱۵۰' : 'اشتباه'
       } else if (mission.id === 'MEMORY') {
-        ms = action.answer as number; detail = `${ms} امتیاز`
+        ms = Math.max(0, action.answer as number); detail = `${ms} امتیاز`
       }
       const res = { ...state.playerResults, [action.playerId]: { playerId: action.playerId, missionScore: ms, detail, responseTime: action.responseTime } }
       const sub = { ...state.submitted, [action.playerId]: true }
       const s2 = { ...state, submitted: sub, playerResults: res }
+      if (mission.type === 'simultaneous') {
+        const allDone = state.players.filter(p => p.connected).every(p => sub[p.id])
+        if (allDone) return doEndMission(s2)
+        return s2
+      }
       if (state.currentTurnIndex + 1 >= state.turnOrder.length) return doEndMission(s2)
       return { ...s2, phase: 'TURN_TRANSITION' }
     }

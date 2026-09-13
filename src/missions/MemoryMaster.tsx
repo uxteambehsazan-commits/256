@@ -23,10 +23,12 @@ function makeBoard(): MemoryBoard {
 }
 
 export default function MemoryMaster({ state, dispatch }: Props) {
-  const currentId = state.turnOrder[state.currentTurnIndex]
+  // Simultaneous mode: one shared board, all players get the same score when done
+  const firstId = state.turnOrder[0]
+  const currentId = firstId
   const currentPlayer = state.players.find(p => p.id === currentId)
   const color = currentPlayer ? PLAYER_COLORS[currentPlayer.colorIndex % PLAYER_COLORS.length] : null
-  const done = state.submitted[currentId]
+  const done = state.submitted[firstId]
 
   const [board, setBoard] = useState<MemoryBoard>(makeBoard)
   const [tempFlipped, setTempFlipped] = useState<number[]>([])
@@ -53,7 +55,11 @@ export default function MemoryMaster({ state, dispatch }: Props) {
   function submitScore() {
     if (done) return
     const rt = (Date.now() - turnStart.current) / 1000
-    dispatch({ type: 'PLAYER_SUBMIT', playerId: currentId, answer: board.score, responseTime: rt })
+    const finalScore = Math.max(0, board.score)
+    // Submit for all players — one shared board result
+    state.turnOrder.forEach(pid => {
+      dispatch({ type: 'PLAYER_SUBMIT', playerId: pid, answer: finalScore, responseTime: rt })
+    })
   }
 
   function flipCard(idx: number) {
@@ -84,11 +90,14 @@ export default function MemoryMaster({ state, dispatch }: Props) {
           if (finished) {
             setTimeout(() => {
               const rt = (Date.now() - turnStart.current) / 1000
-              dispatch({ type: 'PLAYER_SUBMIT', playerId: currentId, answer: newScore, responseTime: rt })
+              state.turnOrder.forEach(pid => {
+                dispatch({ type: 'PLAYER_SUBMIT', playerId: pid, answer: newScore, responseTime: rt })
+              })
             }, 400)
           }
         } else {
-          setBoard(b => ({ ...b, score: Math.max(-200, b.score - 20), moves: b.moves + 1 }))
+          // No negative score — just reset flipped cards
+          setBoard(b => ({ ...b, moves: b.moves + 1 }))
           setFeedback('miss')
           setTimeout(() => {
             setTempFlipped([])
@@ -112,8 +121,8 @@ export default function MemoryMaster({ state, dispatch }: Props) {
             <PlayerAvatar avatar={currentPlayer.avatar} colorIndex={currentPlayer.colorIndex} size="sm" />
             <div className="font-display text-xl font-black" style={{ color: color.light }}>{currentPlayer.name}</div>
             <div className="glass-panel rounded-xl px-3 py-1 font-display text-lg font-black"
-              style={{ color: board.score >= 0 ? '#00ff88' : '#ff2d78' }}>
-              {board.score >= 0 ? '+' : ''}{board.score}
+              style={{ color: '#00ff88' }}>
+              +{board.score}
             </div>
           </div>
         )}
@@ -122,7 +131,7 @@ export default function MemoryMaster({ state, dispatch }: Props) {
         {feedback && (
           <div className={`fixed inset-0 pointer-events-none flex items-center justify-center z-50`}>
             <div className={`font-display text-8xl font-black animate-score-fly ${feedback === 'match' ? 'text-green-400' : 'text-red-400'}`}>
-              {feedback === 'match' ? '+۱۰۰ ✓' : '−۲۰ ✗'}
+              {feedback === 'match' ? '+۱۰۰ ✓' : '✗'}
             </div>
           </div>
         )}
