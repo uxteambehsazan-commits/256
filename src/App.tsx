@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { useGameEngine } from './useGameEngine'
 import { useOnlineRoom, type JoinInfo } from './lib/useOnlineRoom'
 import { MISSIONS } from './constants'
@@ -84,6 +84,44 @@ function OnlineGame({ session, localEngine, onShowScores }: {
   return <GameScreen state={displayState} dispatch={effectiveDispatch} session={session} onShowScores={onShowScores} />
 }
 
+function CancelGameModal({ onConfirm, onClose }: { onConfirm: () => void; onClose: () => void }) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [onClose])
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-5" dir="rtl"
+      style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)' }}
+      onClick={onClose}>
+      <div className="glass-panel rounded-3xl p-6 w-full max-w-sm flex flex-col gap-5 animate-pop-in"
+        style={{ border: '1.5px solid #CC222940' }}
+        onClick={e => e.stopPropagation()}>
+        <div className="text-center">
+          <div className="text-5xl mb-3">⚠️</div>
+          <h2 className="font-display text-xl font-black text-white mb-1">لغو بازی؟</h2>
+          <p className="text-sm" style={{ color: '#6D6E71' }}>
+            بازی فعلی پاک می‌شه و به صفحه اصلی بر می‌گردید
+          </p>
+        </div>
+        <div className="flex gap-3">
+          <button onClick={onClose}
+            className="btn-game flex-1 py-3.5 rounded-2xl font-bold text-sm"
+            style={{ background: '#1e1e20', border: '1.5px solid #2e2e32', color: '#9a9b9e' }}>
+            ادامه بازی
+          </button>
+          <button onClick={onConfirm}
+            className="btn-game flex-1 py-3.5 rounded-2xl font-black text-sm text-white"
+            style={{ background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 4px 20px #CC222944' }}>
+            بله، لغو کن
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function GameScreen({
   state, dispatch, session, onShowScores,
 }: {
@@ -92,6 +130,15 @@ function GameScreen({
   session?: OnlineSession
   onShowScores: () => void
 }) {
+  const [showCancel, setShowCancel] = useState(false)
+  const isHost = !session || session.isHost
+  const inGame = ['COUNTDOWN', 'MISSION_INTRO', 'TURN_TRANSITION', 'PLAYING', 'MISSION_RESULT', 'LEADERBOARD'].includes(state.phase)
+
+  function handleCancel() {
+    dispatch({ type: 'NEW_PLAYERS' })
+    setShowCancel(false)
+  }
+
   return (
     <>
       {state.phase === 'LOBBY' && <Lobby state={state} dispatch={dispatch} session={session} />}
@@ -104,6 +151,19 @@ function GameScreen({
       {state.phase === 'WINNER_CEREMONY' && (
         <WinnerCeremony state={state} dispatch={dispatch} onShowScores={onShowScores} />
       )}
+
+      {/* Cancel button — host only, during active game phases */}
+      {isHost && inGame && (
+        <button
+          onClick={() => setShowCancel(true)}
+          className="fixed top-3 left-3 z-40 btn-game flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold"
+          style={{ background: 'rgba(17,17,18,0.85)', border: '1px solid #CC222930', color: '#6D6E71', backdropFilter: 'blur(8px)' }}>
+          <span style={{ fontSize: '10px' }}>✕</span>
+          <span>لغو بازی</span>
+        </button>
+      )}
+
+      {showCancel && <CancelGameModal onConfirm={handleCancel} onClose={() => setShowCancel(false)} />}
     </>
   )
 }
