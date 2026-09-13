@@ -292,6 +292,14 @@ function reducer(state: GameState, action: GameAction): GameState {
       return { ...state, ...extra, currentTurnIndex: nextIdx, phase: 'PLAYING', timeLeft: mission.timer }
     }
 
+    case 'BRIEFING_READY': {
+      const ready = { ...state.briefingReady, [action.playerId]: true }
+      const activePlayers = state.players.filter(p => p.connected)
+      const allReady = activePlayers.length > 0 && activePlayers.every(p => ready[p.id])
+      if (allReady) return startMissionIntro({ ...state, briefingReady: ready })
+      return { ...state, briefingReady: ready }
+    }
+
     case 'END_MISSION': return doEndMission(state)
 
     case 'SHOW_LEADERBOARD': return { ...state, phase: 'LEADERBOARD' }
