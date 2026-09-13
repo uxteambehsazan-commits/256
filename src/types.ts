@@ -2,6 +2,7 @@ export type Phase =
   | 'HOME'
   | 'LOBBY'
   | 'COUNTDOWN'
+  | 'MISSION_BRIEFING'
   | 'MISSION_INTRO'
   | 'TURN_TRANSITION'
   | 'PLAYING'
@@ -18,6 +19,7 @@ export interface MissionConfig {
   fullName: string
   type: MissionType
   timer: number
+  rules: string[]
   desc: string
   scoring: string
 }
@@ -97,6 +99,7 @@ export interface GameState {
   speedTargets: SpeedTarget[] | null
   showCountdownValue: number
   missionIntroCountdown: number
+  briefingReady: Record<string, boolean>
 }
 
 export interface SpeedTarget {
@@ -109,6 +112,7 @@ export interface SpeedTarget {
 
 export type GameAction =
   | { type: 'CREATE_GAME'; name: string; avatar: string; colorIndex: number }
+  | { type: 'BRIEFING_READY'; playerId: string }
   | { type: 'ADD_PLAYER'; name: string; avatar: string; colorIndex: number }
   | { type: 'REMOVE_PLAYER'; id: string }
   | { type: 'TOGGLE_READY'; id: string }

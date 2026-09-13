@@ -60,6 +60,7 @@ const initial: GameState = {
   goSignalTime: null, teamState: null,
   finalClicks: {}, logicQuestion: null, speedTargets: null,
   showCountdownValue: 3, missionIntroCountdown: 3, memoryBoards: {},
+  briefingReady: {},
 }
 
 function startMissionPhase(state: GameState): GameState {
@@ -77,16 +78,21 @@ function startMissionPhase(state: GameState): GameState {
     extra.teamState = { sequence: seq, activated: [], success: false, failed: false }
   }
 
-  // For turn missions, start with MISSION_INTRO; then move to PLAYING
+  // Show briefing first — players press ready before playing
   return {
     ...state, ...extra,
-    phase: 'MISSION_INTRO',
+    phase: 'MISSION_BRIEFING',
     turnOrder, currentTurnIndex: 0,
-    timeLeft: 3, // intro countdown
+    timeLeft: 0,
     submitted: {}, playerResults: {},
     goSignalTime: null, finalClicks: {},
     missionIntroCountdown: 3,
+    briefingReady: {},
   }
+}
+
+function startMissionIntro(state: GameState): GameState {
+  return { ...state, phase: 'MISSION_INTRO', timeLeft: 3, missionIntroCountdown: 3 }
 }
 
 function startCurrentTurn(state: GameState): GameState {
