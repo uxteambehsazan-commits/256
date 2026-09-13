@@ -254,8 +254,8 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
           style={{ background: 'linear-gradient(to top, #111112, transparent)' }} />
       </div>
 
-      {/* ── 3. Buttons — bottom, fixed, never pushed off screen ── */}
-      <div className="relative z-10 flex-1 flex flex-col justify-end gap-2 px-4 pb-4 w-full max-w-sm mx-auto">
+      {/* ── 3. Buttons — always 100px from bottom ── */}
+      <div className="relative z-10 flex-1 flex flex-col justify-end gap-2 px-4 w-full max-w-sm mx-auto" style={{ paddingBottom: 'calc(100px + env(safe-area-inset-bottom))' }}>
         <button onClick={() => setStep('create-online')}
           className="btn-game w-full rounded-2xl font-black text-white"
           style={{ padding: 'clamp(0.75rem,3vw,1.25rem) 1rem', fontSize: 'clamp(0.95rem,4vw,1.25rem)', background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 4px 28px #CC222955' }}>
