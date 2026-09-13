@@ -225,74 +225,71 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
 
   /* ── Main start screen ── */
   return (
-    <div className="h-full flex flex-col relative overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <div className="h-full flex flex-col relative overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)', paddingTop: 'env(safe-area-inset-top)' }}>
 
-      {/* ── 1. Title — top ── */}
-      <div className="relative z-10 flex flex-col items-center pt-6 pb-2 px-5 animate-pop-in">
+      {/* ── 1. Title — top, fixed height ── */}
+      <div className="relative z-10 flex-shrink-0 flex flex-col items-center pt-4 pb-1 px-5 animate-pop-in">
         <div className="flex items-center gap-2 justify-center">
-          <div className="h-px w-8 opacity-40" style={{ background: '#CC2229' }} />
-          <h1 className="font-display font-black text-white" style={{ fontSize: 'clamp(1.8rem,8vw,2.5rem)', textShadow: '0 0 28px #CC222966' }}>
+          <div className="h-px w-6 opacity-40" style={{ background: '#CC2229' }} />
+          <h1 className="font-display font-black text-white" style={{ fontSize: 'clamp(1.4rem,6vw,2rem)', textShadow: '0 0 28px #CC222966' }}>
             {GAME_NAME}
           </h1>
-          <div className="h-px w-8 opacity-40" style={{ background: '#CC2229' }} />
+          <div className="h-px w-6 opacity-40" style={{ background: '#CC2229' }} />
         </div>
-        <p className="text-sm mt-1" style={{ color: '#6D6E71' }}>بازی گروهی رقابتی — ۳ تا ۸ نفر</p>
+        <p className="text-xs mt-0.5" style={{ color: '#6D6E71' }}>بازی گروهی رقابتی — ۳ تا ۸ نفر</p>
       </div>
 
-      {/* ── 2. Illustration — middle, fills remaining space ── */}
-      <div className="relative flex-1 flex items-center justify-center min-h-0">
+      {/* ── 2. Illustration — fills remaining space, min-h-0 prevents blowout ── */}
+      <div className="relative flex-1 min-h-0 flex items-center justify-center overflow-hidden">
         <img
           src={backImg}
           alt=""
           aria-hidden
           className="w-full h-full object-contain object-center pointer-events-none select-none"
-          style={{ maxHeight: '100%' }}
         />
-        {/* fade top edge into bg */}
-        <div className="absolute inset-x-0 top-0 h-16 pointer-events-none"
+        <div className="absolute inset-x-0 top-0 h-12 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, #111112, transparent)' }} />
-        {/* fade bottom edge into buttons */}
-        <div className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+        <div className="absolute inset-x-0 bottom-0 h-16 pointer-events-none"
           style={{ background: 'linear-gradient(to top, #111112, transparent)' }} />
       </div>
 
-      {/* ── 3. Buttons — bottom ── */}
-      <div className="relative z-10 flex flex-col gap-3 px-5 pb-6 w-full max-w-sm mx-auto">
+      {/* ── 3. Buttons — bottom, fixed, never pushed off screen ── */}
+      <div className="relative z-10 flex-shrink-0 flex flex-col gap-2 px-4 pb-4 w-full max-w-sm mx-auto">
         <button onClick={() => setStep('create-online')}
-          className="btn-game w-full py-5 rounded-2xl font-black text-xl text-white"
-          style={{ background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 4px 28px #CC222955' }}>
+          className="btn-game w-full rounded-2xl font-black text-white"
+          style={{ padding: 'clamp(0.75rem,3vw,1.25rem) 1rem', fontSize: 'clamp(0.95rem,4vw,1.25rem)', background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 4px 28px #CC222955' }}>
           🌐 اتاق آنلاین
         </button>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <button onClick={() => setStep('join')}
-            className="btn-game flex-1 py-4 rounded-2xl font-bold text-sm text-white"
-            style={{ background: 'rgba(204,34,41,0.08)', border: '1.5px solid #CC222940' }}>
+            className="btn-game flex-1 rounded-2xl font-bold text-white"
+            style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(204,34,41,0.08)', border: '1.5px solid #CC222940' }}>
             🔑 ورود با کد
           </button>
           <button onClick={() => setStep('create-local')}
-            className="btn-game flex-1 py-4 rounded-2xl font-bold text-sm text-white"
-            style={{ background: 'rgba(109,110,113,0.1)', border: '1.5px solid #6D6E7140' }}>
+            className="btn-game flex-1 rounded-2xl font-bold text-white"
+            style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(109,110,113,0.1)', border: '1.5px solid #6D6E7140' }}>
             🎮 یک دستگاه
           </button>
         </div>
 
         <button onClick={onShowTutorial}
-          className="btn-game w-full py-3.5 rounded-2xl font-bold text-sm flex items-center justify-center gap-2"
-          style={{ background: 'rgba(255,214,10,0.07)', border: '1.5px solid #ffd60a30', color: '#fde68a' }}>
+          className="btn-game w-full rounded-2xl font-bold flex items-center justify-center gap-2"
+          style={{ padding: 'clamp(0.55rem,2vw,0.875rem) 1rem', fontSize: 'clamp(0.75rem,3vw,0.875rem)', background: 'rgba(255,214,10,0.07)', border: '1.5px solid #ffd60a30', color: '#fde68a' }}>
           <span>📖</span>
-          <span>راهنمای بازی — چطور بازی کنیم؟</span>
+          <span>راهنمای بازی</span>
         </button>
 
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <button onClick={onShowScores}
-            className="btn-game flex-1 py-3 rounded-2xl font-bold text-sm"
-            style={{ background: 'rgba(204,34,41,0.06)', border: '1.5px solid #CC222930', color: '#e84249' }}>
+            className="btn-game flex-1 rounded-2xl font-bold"
+            style={{ padding: 'clamp(0.5rem,2vw,0.75rem) 0.5rem', fontSize: 'clamp(0.75rem,3vw,0.875rem)', background: 'rgba(204,34,41,0.06)', border: '1.5px solid #CC222930', color: '#e84249' }}>
             🏅 امتیازات
           </button>
           <button onClick={onShowCredits}
-            className="btn-game flex-1 py-3 rounded-2xl font-bold text-sm"
-            style={{ background: 'rgba(109,110,113,0.07)', border: '1.5px solid #6D6E7130', color: '#9a9b9e' }}>
+            className="btn-game flex-1 rounded-2xl font-bold"
+            style={{ padding: 'clamp(0.5rem,2vw,0.75rem) 0.5rem', fontSize: 'clamp(0.75rem,3vw,0.875rem)', background: 'rgba(109,110,113,0.07)', border: '1.5px solid #6D6E7130', color: '#9a9b9e' }}>
             👥 تهیه‌کنندگان
           </button>
         </div>
