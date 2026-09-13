@@ -14,6 +14,7 @@ import LogicBreaker from './missions/LogicBreaker'
 import FastestFinger from './missions/FastestFinger'
 import TeamChallenge from './missions/TeamChallenge'
 import FinalMission from './missions/FinalMission'
+import MissionBriefing from './screens/MissionBriefing'
 import MissionResult from './screens/MissionResult'
 import Leaderboard from './screens/Leaderboard'
 import WinnerCeremony from './screens/WinnerCeremony'
@@ -132,7 +133,7 @@ function GameScreen({
 }) {
   const [showCancel, setShowCancel] = useState(false)
   const isHost = !session || session.isHost
-  const inGame = ['COUNTDOWN', 'MISSION_INTRO', 'TURN_TRANSITION', 'PLAYING', 'MISSION_RESULT', 'LEADERBOARD'].includes(state.phase)
+  const inGame = ['COUNTDOWN', 'MISSION_BRIEFING', 'MISSION_INTRO', 'TURN_TRANSITION', 'PLAYING', 'MISSION_RESULT', 'LEADERBOARD'].includes(state.phase)
 
   function handleCancel() {
     dispatch({ type: 'NEW_PLAYERS' })
@@ -143,6 +144,7 @@ function GameScreen({
     <>
       {state.phase === 'LOBBY' && <Lobby state={state} dispatch={dispatch} session={session} />}
       {state.phase === 'COUNTDOWN' && <GameCountdown value={state.showCountdownValue} />}
+      {state.phase === 'MISSION_BRIEFING' && <MissionBriefing state={state} dispatch={dispatch} />}
       {state.phase === 'MISSION_INTRO' && <MissionIntro state={state} />}
       {state.phase === 'TURN_TRANSITION' && <TurnTransition state={state} />}
       {state.phase === 'PLAYING' && <MissionRenderer state={state} dispatch={dispatch} />}
