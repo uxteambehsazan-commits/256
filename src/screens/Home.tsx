@@ -49,7 +49,7 @@ function BackBtn({ onBack }: { onBack: () => void }) {
   return (
     <button onClick={onBack} className="btn-game py-3.5 px-5 rounded-2xl font-bold text-base"
       style={{ background: '#1e1e20', border: '1.5px solid #2e2e32', color: '#6D6E71' }}>
-      ← برگشت
+      برگشت →
     </button>
   )
 }
@@ -136,7 +136,7 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
     <div className="h-full flex flex-col overflow-y-auto">
       <div className="flex-1 flex flex-col gap-5 p-5 pt-8 max-w-md mx-auto w-full">
         <div className="flex items-center gap-3">
-          <button onClick={goBack} className="btn-game text-2xl" style={{ color: '#6D6E71' }}>←</button>
+          <button onClick={goBack} className="btn-game text-2xl" style={{ color: '#6D6E71' }}>→</button>
           <img src={bmLogo} alt="" className="h-7 object-contain opacity-80" />
         </div>
         <div className="text-center py-2">
@@ -163,7 +163,7 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
     <div className="h-full flex flex-col overflow-y-auto">
       <div className="flex-1 flex flex-col gap-5 p-5 pt-8 max-w-md mx-auto w-full">
         <div className="flex items-center gap-3">
-          <button onClick={goBack} className="btn-game text-2xl" style={{ color: '#6D6E71' }}>←</button>
+          <button onClick={goBack} className="btn-game text-2xl" style={{ color: '#6D6E71' }}>→</button>
           <img src={bmLogo} alt="" className="h-7 object-contain opacity-80" />
         </div>
         <div className="text-center py-2">
@@ -193,7 +193,7 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
     <div className="h-full flex flex-col overflow-y-auto">
       <div className="flex-1 flex flex-col gap-5 p-5 pt-8 max-w-md mx-auto w-full">
         <div className="flex items-center gap-3">
-          <button onClick={goBack} className="btn-game text-2xl" style={{ color: '#6D6E71' }}>←</button>
+          <button onClick={goBack} className="btn-game text-2xl" style={{ color: '#6D6E71' }}>→</button>
           <img src={bmLogo} alt="" className="h-7 object-contain opacity-80" />
         </div>
         <div className="text-center py-2">
@@ -263,15 +263,15 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
         </button>
 
         <div className="flex gap-2">
-          <button onClick={() => setStep('create-local')}
-            className="btn-game flex-1 rounded-2xl font-bold text-white"
-            style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(109,110,113,0.1)', border: '1.5px solid #6D6E7140' }}>
-            🎮 یک دستگاه
-          </button>
           <button onClick={() => setStep('join')}
             className="btn-game flex-1 rounded-2xl font-bold text-white"
             style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(204,34,41,0.08)', border: '1.5px solid #CC222940' }}>
             🔑 ورود با کد
+          </button>
+          <button onClick={() => setStep('create-local')}
+            className="btn-game flex-1 rounded-2xl font-bold text-white"
+            style={{ padding: 'clamp(0.6rem,2.5vw,1rem) 0.5rem', fontSize: 'clamp(0.75rem,3.5vw,0.875rem)', background: 'rgba(109,110,113,0.1)', border: '1.5px solid #6D6E7140' }}>
+            🎮 یک دستگاه
           </button>
         </div>
 

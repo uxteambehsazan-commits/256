@@ -77,7 +77,7 @@ export default function Lobby({ state, dispatch, session }: Props) {
             onClick={() => dispatch({ type: 'NEW_PLAYERS' })}
             className="btn-game flex-shrink-0 text-sm px-3 py-1.5 rounded-xl font-bold"
             style={{ background: '#1e1e20', border: '1px solid #2e2e32', color: '#6D6E71' }}>
-            ← خروج
+            خروج →
           </button>
           <div className="flex-1 text-center">
             <span className="font-display font-black text-white text-base">{GAME_NAME}</span>
