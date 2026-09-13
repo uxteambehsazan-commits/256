@@ -67,7 +67,7 @@ export default function Lobby({ state, dispatch, session }: Props) {
   }
 
   return (
-    <div className="h-full flex flex-col overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <div className="h-full flex flex-col overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)', paddingTop: 'env(safe-area-inset-top)' }}>
 
       {/* ══ HEADER ══ */}
       <div className="glass-panel flex-shrink-0 px-4 pt-3 pb-3 flex flex-col gap-2">

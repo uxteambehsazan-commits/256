@@ -34,7 +34,7 @@ export default function GameCountdown({ value }: Props) {
         <div
           className="font-display font-black leading-none"
           style={{
-            fontSize: value === 0 ? '5rem' : '12rem',
+            fontSize: value === 0 ? 'clamp(3rem,12vw,5rem)' : 'clamp(5rem,22vw,12rem)',
             color: info.color,
             textShadow: `0 0 60px ${info.color}`,
           }}>
@@ -43,7 +43,7 @@ export default function GameCountdown({ value }: Props) {
       </div>
 
       {value > 0 && (
-        <div className="mt-8 text-purple-300 text-lg animate-slide-up">آماده باش...</div>
+        <div className="mt-4 text-purple-300 text-base animate-slide-up">آماده باش...</div>
       )}
     </div>
   )

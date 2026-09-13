@@ -232,18 +232,18 @@ export default function WinnerCeremony({ state, dispatch, onShowScores }: Props)
           {/* Action row */}
           <div className="flex gap-2 max-w-lg mx-auto">
             <button onClick={() => dispatch({ type: 'REPLAY' })}
-              className="btn-game flex-1 py-3 rounded-2xl font-black text-white text-sm"
-              style={{ background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 0 16px #CC222944' }}>
+              className="btn-game flex-1 py-3 rounded-2xl font-black text-white min-w-0"
+              style={{ fontSize: 'clamp(0.7rem,3vw,0.875rem)', background: 'linear-gradient(135deg,#CC2229,#e84249)', boxShadow: '0 0 16px #CC222944' }}>
               🔥 دوباره
             </button>
             <button onClick={onShowScores}
-              className="btn-game flex-1 py-3 rounded-2xl font-black text-sm"
-              style={{ background: 'rgba(204,34,41,0.08)', border: '1px solid #CC222944', color: '#e84249' }}>
+              className="btn-game flex-1 py-3 rounded-2xl font-black min-w-0"
+              style={{ fontSize: 'clamp(0.7rem,3vw,0.875rem)', background: 'rgba(204,34,41,0.08)', border: '1px solid #CC222944', color: '#e84249' }}>
               🏅 تابلو
             </button>
             <button onClick={() => dispatch({ type: 'NEW_PLAYERS' })}
-              className="btn-game flex-1 py-3 rounded-2xl font-black text-sm"
-              style={{ border: '1px solid #333', color: '#6D6E71', background: 'transparent' }}>
+              className="btn-game flex-1 py-3 rounded-2xl font-black min-w-0"
+              style={{ fontSize: 'clamp(0.7rem,3vw,0.875rem)', border: '1px solid #333', color: '#6D6E71', background: 'transparent' }}>
               👥 جدید
             </button>
           </div>

@@ -228,10 +228,10 @@ export default function Home({ dispatch, onOnlineCreate, onOnlineJoin, onShowSco
     <div className="h-full flex flex-col relative overflow-hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
 
       {/* ── 1. Title — top ── */}
-      <div className="relative z-10 flex flex-col items-center pt-12 pb-2 px-5 animate-pop-in">
+      <div className="relative z-10 flex flex-col items-center pt-6 pb-2 px-5 animate-pop-in">
         <div className="flex items-center gap-2 justify-center">
           <div className="h-px w-8 opacity-40" style={{ background: '#CC2229' }} />
-          <h1 className="font-display text-4xl font-black text-white" style={{ textShadow: '0 0 28px #CC222966' }}>
+          <h1 className="font-display font-black text-white" style={{ fontSize: 'clamp(1.8rem,8vw,2.5rem)', textShadow: '0 0 28px #CC222966' }}>
             {GAME_NAME}
           </h1>
           <div className="h-px w-8 opacity-40" style={{ background: '#CC2229' }} />
